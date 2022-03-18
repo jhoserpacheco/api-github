@@ -1,0 +1,32 @@
+USER INFORMATION </br></br>
+
+USER: {{user}} </br></br>
+
+    <table>
+        {% for key, value in get_user.items %}
+            <tr>
+                
+                <td style='border: 1px solid black'> {{ key }} </td> 
+                {%if key == 'IMG_URL'%}
+                    <td style='border: 1px solid black'>  <img src="{{ value }}" style="width:200px; height:200px "> </td>
+                {%else%}
+                    <td style='border: 1px solid black'>  {{ value }} </td>
+                {%endif%}
+            </tr>
+        
+        {% endfor %}
+    <table></br></br>
+
+
+LIST REPOSITORY: {{ size }} </br></br>
+
+
+<table style='border: 1px solid black'>
+    
+    {% for repo in repos %}
+        <tr>
+            <td style='border: 1px solid black'> {{ repo.full_name }}</td>
+        </tr>
+    {% endfor %}
+
+</table>

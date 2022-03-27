@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models.expressions import Subquery
+from django.http import HttpResponse
 from django.http.response import FileResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -13,11 +14,11 @@ class GithubView(View):
     def get(self, request, user, *args, **kwargs):
         lista = get_repos(user)
         context={'user': user,
-                'get_user': info_user(user), 
+                'get_user': info_user(user).json(), 
                 'repos': lista,
                 'size': len(lista)
                 }
-        return render(request, 'index.html', context)
+        return HttpResponse(request, 'index.html', context)
 
 class Repository(View):
     def get(self, request, user, repository, *args, **kwargs):

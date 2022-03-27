@@ -1,4 +1,6 @@
 import os
+import json
+from django.http import HttpResponse
 
 from github import Github
 
@@ -12,11 +14,12 @@ def info_user(user):
     user_dict['IMG_URL'] = usuario.avatar_url
     user_dict['ID'] = usuario.id
     user_dict['BIO'] = usuario.bio
-    user_dict['CREATED_AT'] = usuario.created_at
+    user_dict['CREATED_AT'] = usuario.created_at.strftime("%d/%m/%Y")
     user_dict['# FOLLOWERS'] = usuario.followers
     user_dict['# FOLLOWING'] = usuario.following
+    user_json = json.dumps(user_dict, sort_keys=True, indent=4)
     
-    return user_dict
+    return user_json
 
 def get_repos(user):
     repo = [x for x in g.get_user(user).get_repos()]
@@ -37,4 +40,4 @@ def info_repo(user, repository):
     repository_dict['# FORKS'] = repo.forks_count
     repository_dict['SIZE KB'] = repo.size
     
-    return repository_dict
+    return json.dumps(repository_dict, default=str, sort_keys=True, indent=4)

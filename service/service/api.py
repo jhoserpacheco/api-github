@@ -17,12 +17,14 @@ def info_user(user):
     user_dict['CREATED_AT'] = usuario.created_at.strftime("%d/%m/%Y")
     user_dict['# FOLLOWERS'] = usuario.followers
     user_dict['# FOLLOWING'] = usuario.following
+    user_dict['# REPOS'] = list(get_repos(user))
+    
     user_json = json.dumps(user_dict, sort_keys=True, indent=4)
     
     return user_json
 
 def get_repos(user):
-    repo = [x for x in g.get_user(user).get_repos()]
+    repo = [str(x.full_name) for x in g.get_user(user).get_repos()]
     return repo
 
 def info_repo(user, repository):

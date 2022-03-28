@@ -2,7 +2,7 @@
 
 ### Description & Context
 
-This project is developing in the Python language using Django. It is a microservice that consumes the Github API to obtain user information and user repositories.
+This project is developing in the Python language using Django and Docker container. It is a microservice that consumes the Github API to obtain user information and user repositories.
 
 <hr>
 
@@ -67,3 +67,18 @@ curl -x 127.0.0.1:8000/jhoserpacheco/api-github
 }
 ```
 
+<hr>
+
+### Run project
+
+Git clone this repository into your local machine.
+```
+git clone https://github.com/jhoserpacheco/api-github
+
+cd api-github/service 
+```
+
+Execute container
+```
+docker-compose up
+```
